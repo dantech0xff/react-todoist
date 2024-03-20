@@ -1,9 +1,12 @@
 import TodoList from './components/TodoList'
+import styles from './app.module.scss'
 
 function App() {
   return (
-    <div>
-      <TodoList />
+    <div className={styles.centerParent}>
+      <div className={styles.centerAppContent}>
+        <TodoList />
+      </div>
     </div>
   )
 }

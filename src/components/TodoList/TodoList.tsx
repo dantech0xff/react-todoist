@@ -1,9 +1,11 @@
 import TaskInput from '../TaskInput'
 import TaskList from '../TaskList'
+import styles from './todoList.module.scss'
 
 export function TodoList() {
   return (
-    <div>
+    <>
+      <h2 className={styles.appTitle}>React Keep</h2>
       <TaskInput />
       <TaskList
         taskListItems={[
@@ -24,6 +26,6 @@ export function TodoList() {
           }
         ]}
       />
-    </div>
+    </>
   )
 }
