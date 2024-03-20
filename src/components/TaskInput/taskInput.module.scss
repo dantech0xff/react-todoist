@@ -1,6 +1,20 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+}
+
 .taskInputText {
   padding: 10px;
-  border: 0px solid #ccc;
+  border: 0px solid #ffffff;
   border-radius: 8px;
   font-size: 16px;
+  flex-grow: 1;
+  margin-right: 5px;
+}
+
+.taskInputButton {
+  background-color: white;
+  border: 0px solid #ffffff;
+  border-radius: 8px;
+  padding: 12px;
 }
