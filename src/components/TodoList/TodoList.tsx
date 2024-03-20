@@ -1,31 +1,27 @@
+import { useEffect, useState } from 'react'
 import TaskInput from '../TaskInput'
 import TaskList from '../TaskList'
 import styles from './todoList.module.scss'
-
+import { todoRepository } from '../../@DataSource/NoteRepository'
+import { Todo } from '../../@types/Todo.type'
 export function TodoList() {
+  const [todoList, setTodoList] = useState<Todo[]>([])
+  useEffect(() => {
+    const todos = todoRepository.getAll()
+    setTodoList(todos)
+  }, [])
+
+  const handleTaskAdd = (task: string) => {
+    const addedItem = todoRepository.addTodo(task)
+    const newTodoList = [...todoList, addedItem]
+    setTodoList(newTodoList)
+  }
+
   return (
     <>
       <h2 className={styles.appTitle}>React Keep</h2>
-      <TaskInput />
-      <TaskList
-        taskListItems={[
-          {
-            id: '1',
-            done: false,
-            title: 'Task 1'
-          },
-          {
-            id: '2',
-            done: false,
-            title: 'Task 2'
-          },
-          {
-            id: '3',
-            done: false,
-            title: 'Task 3'
-          }
-        ]}
-      />
+      <TaskInput onTaskAdd={handleTaskAdd} />
+      <TaskList taskListItems={todoList} />
     </>
   )
 }

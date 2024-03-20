@@ -1,8 +1,7 @@
-import { randomUUID } from 'crypto'
 import { Todo } from '../@types/Todo.type'
-
-export interface NoteRepository {
-  addTodo(todo: string): string
+import { nanoid } from 'nanoid'
+export interface ToDoRepository {
+  addTodo(todo: string): Todo
   deleteTodo(id: string): boolean
   updateTodo(id: string, note: string): boolean
   checkDone(id: string): boolean
@@ -10,22 +9,24 @@ export interface NoteRepository {
   getAll(): Todo[]
 }
 
-export class NoteRepositoryImpl implements NoteRepository {
+export class ToDoRepositoryImpl implements ToDoRepository {
   TODO: string = 'TODO'
-  addTodo(todo: string): string {
+  addTodo(todo: string): Todo {
     let todosString = localStorage.getItem(this.TODO)
     if (todosString == null || todosString === '') {
       todosString = '[]'
     }
     const todoItem = {
-      id: randomUUID(),
+      id: nanoid(),
       done: false,
-      title: todo
+      title: todo,
+      created_at: new Date(),
+      updated_at: new Date()
     }
     const todos = JSON.parse(todosString)
     todos.push(todoItem)
     localStorage.setItem(this.TODO, JSON.stringify(todos))
-    return todoItem.id
+    return todoItem
   }
 
   deleteTodo(id: string): boolean {
@@ -47,6 +48,7 @@ export class NoteRepositoryImpl implements NoteRepository {
     const newTodos = todos.map((todo: Todo) => {
       if (todo.id === id) {
         todo.title = note
+        todo.updated_at = new Date()
       }
       return todo
     })
@@ -62,6 +64,7 @@ export class NoteRepositoryImpl implements NoteRepository {
     const newTodos = todos.map((todo: Todo) => {
       if (todo.id === id) {
         todo.done = true
+        todo.updated_at = new Date()
       }
       return todo
     })
@@ -77,6 +80,7 @@ export class NoteRepositoryImpl implements NoteRepository {
     const newTodos = todos.map((todo: Todo) => {
       if (todo.id === id) {
         todo.done = false
+        todo.updated_at = new Date()
       }
       return todo
     })
@@ -94,4 +98,4 @@ export class NoteRepositoryImpl implements NoteRepository {
   }
 }
 
-export const noteRepository: NoteRepository = new NoteRepositoryImpl()
+export const todoRepository: ToDoRepository = new ToDoRepositoryImpl()

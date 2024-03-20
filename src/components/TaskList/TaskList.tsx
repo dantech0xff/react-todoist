@@ -12,7 +12,6 @@ export default function TaskList(props: TaskListProps) {
   return (
     <>
       <div>
-        <h2>Task List</h2>
         <div>
           {taskListItems.map((task) => (
             <div key={task.id}>

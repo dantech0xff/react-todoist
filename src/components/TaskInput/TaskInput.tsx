@@ -1,11 +1,21 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 import styles from './taskInput.module.scss'
 
-export default function TaskInput() {
-  const handleSubmit = () => {}
+interface TaskInputProps {
+  onTaskAdd: (task: string) => void
+}
+
+export default function TaskInput(props: TaskInputProps) {
+  const handleSubmit = () => {
+    props.onTaskAdd(task)
+    setTask('')
+  }
   const handleInputNoteChange = (event: ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.value)
+    setTask(event.target.value)
   }
+
+  const [task, setTask] = useState('')
 
   return (
     <>
@@ -15,6 +25,7 @@ export default function TaskInput() {
           className={styles.taskInputText}
           placeholder='Todo Here...'
           onChange={handleInputNoteChange}
+          value={task}
         />
         <button type='submit' className={styles.taskInputButton}>
           +
