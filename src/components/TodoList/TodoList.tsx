@@ -13,15 +13,60 @@ export function TodoList() {
 
   const handleTaskAdd = (task: string) => {
     const addedItem = todoRepository.addTodo(task)
-    const newTodoList = [...todoList, addedItem]
-    setTodoList(newTodoList)
+    setTodoList((previousTodoList) => [addedItem, ...previousTodoList])
+  }
+  const handleDoneTodo = (id: string) => {
+    const updatedTodoList = todoList.map((todo) => {
+      if (todo.id === id) {
+        todoRepository.checkDone(id)
+        todo.done = true
+        return {
+          ...todo,
+          done: true
+        }
+      }
+      return todo
+    })
+    updatedTodoList.sort((a, b) => {
+      if (a.done === b.done) {
+        return 0
+      }
+      if (a.done) {
+        return 1
+      }
+      return -1
+    })
+    setTodoList(updatedTodoList)
+  }
+  const handleUnDoneTodo = (id: string) => {
+    const updatedTodoList = todoList.map((todo) => {
+      if (todo.id === id) {
+        todoRepository.checkUndone(id)
+        todo.done = false
+        return {
+          ...todo,
+          done: false
+        }
+      }
+      return todo
+    })
+    updatedTodoList.sort((a, b) => {
+      if (a.done === b.done) {
+        return 0
+      }
+      if (a.done) {
+        return 1
+      }
+      return -1
+    })
+    setTodoList(updatedTodoList)
   }
 
   return (
     <>
       <h2 className={styles.appTitle}>React Keep</h2>
       <TaskInput onTaskAdd={handleTaskAdd} />
-      <TaskList taskListItems={todoList} />
+      <TaskList taskListItems={todoList} onHandleDoneTodo={handleDoneTodo} onHandleUnDoneTodo={handleUnDoneTodo} />
     </>
   )
 }

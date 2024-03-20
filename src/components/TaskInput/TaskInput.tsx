@@ -11,7 +11,6 @@ export default function TaskInput(props: TaskInputProps) {
     setTask('')
   }
   const handleInputNoteChange = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
     setTask(event.target.value)
   }
 
@@ -28,7 +27,7 @@ export default function TaskInput(props: TaskInputProps) {
           value={task}
         />
         <button type='submit' className={styles.taskInputButton}>
-          +
+          🪄
         </button>
       </form>
     </>

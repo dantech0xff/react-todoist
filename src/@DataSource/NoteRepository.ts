@@ -94,7 +94,27 @@ export class ToDoRepositoryImpl implements ToDoRepository {
       return []
     }
     const todos = JSON.parse(todosString)
-    return todos
+    const doneTodos = todos.filter((todo: Todo) => todo.done)
+    doneTodos.sort((a: Todo, b: Todo) => {
+      if (a.updated_at === b.updated_at) {
+        return 0
+      }
+      if (a.updated_at < b.updated_at) {
+        return 1
+      }
+      return -1
+    })
+    const undoneTodos = todos.filter((todo: Todo) => !todo.done)
+    undoneTodos.sort((a: Todo, b: Todo) => {
+      if (a.updated_at === b.updated_at) {
+        return 0
+      }
+      if (a.updated_at < b.updated_at) {
+        return 1
+      }
+      return -1
+    })
+    return [...undoneTodos, ...doneTodos]
   }
 }
 
