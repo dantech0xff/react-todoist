@@ -7,8 +7,8 @@
 
 .checkBoxItem {
   appearance: none; // Remove default checkbox appearance
-  width: 25px;
-  height: 25px;
+  width: 1rem;
+  height: 1rem;
   // border: 1px solid #ccc; // Add a border
   background-color: #fff; // Add a background color
   border-radius: 5px; // Add a border radius
@@ -21,8 +21,8 @@
     &::after {
       content: '🦄';
       position: relative;
-      top: 18%; // Move it to the vertical center
-      left: 18%; // Move it to the horizontal center
+      top: 0.13rem; // Move it to the vertical center
+      left: 0.13rem; // Move it to the horizontal center
       font-size: 0.5rem;
     }
     box-shadow: 0px 0px 10px rgb(255, 255, 255);
