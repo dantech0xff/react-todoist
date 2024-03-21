@@ -56,6 +56,11 @@ export default function TodoItem(props: TodoItemProps) {
           onChange={handleEdit}
           onFocus={handleFocus}
           onBlur={handleBlurFocus}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.currentTarget.blur()
+            }
+          }}
         />
         <button type='button' className={`${styles.deleteButton}`} onClick={handleDelete}>
           X

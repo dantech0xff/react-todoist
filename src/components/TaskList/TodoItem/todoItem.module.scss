@@ -6,6 +6,27 @@
 }
 
 .checkBoxItem {
+  appearance: none; // Remove default checkbox appearance
+  width: 25px;
+  height: 25px;
+  // border: 1px solid #ccc; // Add a border
+  background-color: #fff; // Add a background color
+  border-radius: 5px; // Add a border radius
+  &:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; // Change the background color on hover
+  }
+  &:checked {
+    background-color: #ffffff; // Change the background color when checked
+    &::after {
+      content: '🦄';
+      position: relative;
+      top: 18%; // Move it to the vertical center
+      left: 18%; // Move it to the horizontal center
+      font-size: 0.5rem;
+    }
+    box-shadow: 0px 0px 10px rgb(255, 255, 255);
+  }
 }
 .todoItemText {
   flex-grow: 1;
@@ -28,11 +49,14 @@
   margin-left: 5px;
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px rgb(255, 255, 255);
   }
   &.todoItemEditTextDone {
     color: #777777;
     text-decoration: line-through;
+  }
+  &:hover {
+    box-shadow: 0px 0px 5px rgb(255, 255, 255);
   }
 }
 
@@ -43,9 +67,10 @@
   border-radius: 5px;
   padding: 5px;
   margin-left: 5px;
+  min-width: 32px;
   cursor: pointer;
   &:hover {
-    background-color: #cacaca;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    box-shadow: 0px 0px 5px rgb(255, 255, 255);
   }
 }
