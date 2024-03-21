@@ -62,11 +62,38 @@ export function TodoList() {
     setTodoList(updatedTodoList)
   }
 
+  const handleUpdateTodo = (id: string, note: string) => {
+    todoRepository.updateTodo(id, note)
+    const updatedTodoList = todoList.map((todo) => {
+      if (todo.id === id) {
+        todo.title = note
+        return {
+          ...todo,
+          title: note
+        }
+      }
+      return todo
+    })
+    setTodoList(updatedTodoList)
+  }
+
+  const handleDeleteTodo = (id: string) => {
+    todoRepository.deleteTodo(id)
+    const updatedTodoList = todoList.filter((todo) => todo.id !== id)
+    setTodoList(updatedTodoList)
+  }
+
   return (
     <>
       <h2 className={styles.appTitle}>React Keep</h2>
       <TaskInput onTaskAdd={handleTaskAdd} />
-      <TaskList taskListItems={todoList} onHandleDoneTodo={handleDoneTodo} onHandleUnDoneTodo={handleUnDoneTodo} />
+      <TaskList
+        taskListItems={todoList}
+        onHandleDoneTodo={handleDoneTodo}
+        onHandleUnDoneTodo={handleUnDoneTodo}
+        onUpdateTodo={handleUpdateTodo}
+        onDeleteTodo={handleDeleteTodo}
+      />
     </>
   )
 }

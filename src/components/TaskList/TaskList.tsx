@@ -7,16 +7,25 @@ interface TaskListProps {
   taskListItems: Todo[]
   onHandleDoneTodo: (id: string) => void
   onHandleUnDoneTodo: (id: string) => void
+  onUpdateTodo: (id: string, note: string) => void
+  onDeleteTodo: (id: string) => void
 }
 
 export default function TaskList(props: TaskListProps) {
-  const { taskListItems, onHandleDoneTodo, onHandleUnDoneTodo } = props
+  const { taskListItems, onHandleDoneTodo, onHandleUnDoneTodo, onUpdateTodo, onDeleteTodo } = props
 
   return (
     <>
       <div className={styles.listTodo}>
         {taskListItems.map((task) => (
-          <TodoItem todo={task} key={task.id} onDoneTodo={onHandleDoneTodo} onUnDoneTodo={onHandleUnDoneTodo} />
+          <TodoItem
+            todo={task}
+            key={task.id}
+            onDoneTodo={onHandleDoneTodo}
+            onUnDoneTodo={onHandleUnDoneTodo}
+            onUpdateTodo={onUpdateTodo}
+            onDeleteTodo={onDeleteTodo}
+          />
         ))}
       </div>
     </>
