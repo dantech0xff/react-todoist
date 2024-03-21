@@ -6,7 +6,8 @@ interface TaskInputProps {
 }
 
 export default function TaskInput(props: TaskInputProps) {
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
     props.onTaskAdd(task)
     setTask('')
   }
